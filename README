@@ -1,0 +1,25 @@
+After searching for a suitable php Twitter component for cakephp I found none. So here is my attemp at it. 
+This component implenets all of the twitter api found on 
+http://groups.google.com/group/twitter-development-talk/web/api-documentation
+
+	<?php 
+	    class TweetsController extends AppController
+	    {
+	        var $name = 'Tweets';
+	        var $helpers = array('Time', 'Html');
+	        var $components = array('Twitter');        
+	        var $uses = array();
+	        
+	        function index()
+	        {
+	            $this->Twitter->username = Configure::read('Twitter.username');
+	            $this->Twitter->password = Configure::read('Twitter.password');
+	            $statuses = $this->Twitter->status_user_timeline(
+	                            Configure::read('Twitter.username') ,
+	                            array('count' => 10)
+	            );
+	            if(array_key_exists('statuses', $statuses))
+	                $this->set('tweets', $statuses['statuses']['status']);                
+	        }
+	    }
+	?> 
