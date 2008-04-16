@@ -167,7 +167,7 @@
          * @see http://groups.google.com/group/twitter-development-talk/web/api-documentation
          */
         function user_show($id=false, $params = array()) {
-            $url = " http://twitter.com/users/show";
+            $url = "http://twitter.com/users/show";
             if($id != false) {
                 $url .= "/{$id}.xml";
             } else {
