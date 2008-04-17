@@ -74,7 +74,7 @@
          * @see http://groups.google.com/group/twitter-development-talk/web/api-documentation
          */
         function status_show($id) {
-            $url = " http://twitter.com/statuses/show/{$id}.xml";
+            $url = "http://twitter.com/statuses/show/{$id}.xml";
             
             return $this->__process($this->Http->get($url));
         }
