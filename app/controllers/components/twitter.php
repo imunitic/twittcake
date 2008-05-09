@@ -285,6 +285,30 @@
         }
         
         /**
+         * Updates the location attribute of the authenticating user,
+         * as displayed on the side of their profile and returned in various API methods.
+         *
+         * @param string location The location of the user.  Please note this is not normalized, geocoded, or translated to latitude/longitude at this time.
+         * @see http://groups.google.com/group/twitter-development-talk/web/api-documentation
+         */
+        function account_update_location($location) {
+            $url = 'http://twitter.com/account/update_location.xml';
+            return $this->__process($this->Http->get($url, array('location' => $location), $this->__getAuthHeader()));            
+        }
+        
+        /**
+         * Sets which device Twitter delivers updates to for the authenticating user.
+         * Sending none as the device parameter will disable IM or SMS updates.
+         *
+         * @param string device  Must be one of: sms, im, none.
+         * @see http://groups.google.com/group/twitter-development-talk/web/api-documentation
+         */
+        function account_update_delivery_device($device) {
+            $url = 'http://twitter.com/account/update_delivery_device.xml';
+            return $this->__process($this->Http->get($url, array('device' => $device), $this->__getAuthHeader()));
+        }
+        
+        /**
          * Returns the 20 most recent favorite statuses for the authenticating user
          * or user specified by the ID parameter in the requested format.
          *
@@ -346,9 +370,53 @@
          * @see http://groups.google.com/group/twitter-development-talk/web/api-documentation
          */         
         function notifications_leave($id) {
-            $url = "http://twitter.com/notifications/leave/{$id}.xml";
-            
-            return $this->__process($this->Http->get($url, null, $this->__getAuthHeader()));                        
+            $url = "http://twitter.com/notifications/leave/{$id}.xml";            
+            return $this->__process($this->Http->get($url, null, $this->__getAuthHeader()));
+        }
+        
+        /**
+         * Blocks the user specified in the ID parameter as the authenticating user.
+         * Returns the blocked user in the requested format when successful.
+         *
+         * @param string id The ID or screen_name of the user to block
+         * @see http://groups.google.com/group/twitter-development-talk/web/api-documentation
+         */
+        function block_create($id) {
+            $url = "http://twitter.com/blocks/create/{$id}.xml";
+            return $this->__process($this->Http->get($url, null, $this->__getAuthHeader()));
+        }
+        
+        /**
+         * Un-blocks the user specified in the ID parameter as the authenticating user.
+         * Returns the un-blocked user in the requested format when successful. 
+         *
+         * @param string id The ID or screen_name of the user to block
+         * @see http://groups.google.com/group/twitter-development-talk/web/api-documentation
+         */
+        function block_destroy($id) {
+            $url = "http://twitter.com/blocks/destroy/{$id}.xml";
+            return $this->__process($this->Http->get($url, null, $this->__getAuthHeader()));            
+        }
+        
+        /**
+         * Returns the string "ok" in the requested format with a 200 OK HTTP status code.
+         *
+         * @see http://groups.google.com/group/twitter-development-talk/web/api-documentation
+         */
+        function help_test() {
+            $url = 'http://twitter.com/help/test.xml';
+            return $this->__process($this->Http->get($url));
+        }
+        
+        /**
+         * Returns the same text displayed on http://twitter.com/home when
+         * a maintenance window is scheduled, in the requested format.
+         * 
+         * @see http://groups.google.com/group/twitter-development-talk/web/api-documentation
+         */
+        function help_downtime_schedule() {
+            $url = 'http://twitter.com/help/downtime_schedule.xml';
+            return $this->__process($this->Http->get($url));            
         }
         
         // Private functions
