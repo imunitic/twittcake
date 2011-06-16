@@ -418,7 +418,7 @@
          * @see http://apiwiki.twitter.com/Twitter-Search-API-Method%3A-trends-current
          */
         function search_trends_current($exclude = null) {
-            $url = "http://search.twitter.com/trends/current.json"
+            $url = "http://search.twitter.com/trends/current.json";
 
             if($exclude != null) $url = $this->__addParam("exclude", $exclude, $url);
 
@@ -433,7 +433,7 @@
          * @see http://apiwiki.twitter.com/Twitter-Search-API-Method%3A-trends-daily
          */
         function search_trends_daily($date = null, $exclude = null) {
-            $url = "http://search.twitter.com/trends/daily.json"
+            $url = "http://search.twitter.com/trends/daily.json";
 
             if($exclude != null) $url = $this->__addParam("exclude", $exclude, $url);
             if($date != null) $url = $this->__addParam("date", $date, $url);
@@ -449,7 +449,7 @@
          * @see http://apiwiki.twitter.com/Twitter-Search-API-Method%3A-trends-weekly
          */
         function search_trends_weekly($date = null, $exclude = null) {
-            $url = "http://search.twitter.com/trends/weekly.json"
+            $url = "http://search.twitter.com/trends/weekly.json";
 
             if($exclude != null) $url = $this->__addParam("exclude", $exclude, $url);
             if($date != null) $url = $this->__addParam("date", $date, $url);
